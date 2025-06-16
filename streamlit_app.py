@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import openai
@@ -59,4 +60,3 @@ if uploaded_file:
             st.error(f"❌ Error: {str(e)}")
     else:
         st.error("❌ Please upload a file named 'Intelligence report'.")
-
