@@ -5,7 +5,7 @@ import openai
 import io
 
 # Set your OpenAI API key
-openai.api_key = "sk-proj-..."  # Replace with your actual key
+openai.api_key = "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"  # Replace with your actual key
 
 # Function to process each row using OpenAI API
 def process_with_openai(prompt_question, detail_text):
