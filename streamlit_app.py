@@ -1,24 +1,23 @@
-
 import streamlit as st
 import pandas as pd
 import openai
 import io
 
-# Set your OpenAI API key
 
-client = openai.OpenAI(api_key="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")
+# Load API key from Streamlit secrets
+client = openai.OpenAI(api_key=st.secrets["openai"]["api_key"])
 
+# Function to process each row using OpenAI API
 def process_with_openai(prompt_question, detail_text):
-    response = client.chat.completions.create(
-        model="gpt-4",
-        messages=[
-            {"role": "system", "content": prompt_question},
-            {"role": "user", "content": detail_text}
-        ],
-        max_tokens=100
-    )
-    return response.choices[0].message.content.strip()
-
+    response = client.chat.completions.create(
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": prompt_question},
+            {"role": "user", "content": detail_text}
+        ],
+        max_tokens=100
+    )
+    return response.choices[0].message.content.strip()
 
 # Streamlit UI
 st.title("🧠 Intelligence Report Summarizer")
