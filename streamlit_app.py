@@ -19,7 +19,17 @@ def process_with_openai(prompt_question, detail_text):
     return response.choices[0].message.content.strip()
 
 # Streamlit UI
-st.title("🧠 Intelligence Report Summarizer")
+st.title("🧠 Intelligence/Incident Report Summarizer")
+st.markdown("""
+### 📌 Instructions:
+Please make sure your Excel file includes the following columns **with these exact names**:
+- 🕒 `Reporting Timestamp` — for the date and time of the report
+- 📍 `Location` — for the location of the event
+- 📝 `Details` — for the full description you want summarized
+
+You can rename your columns in Excel before uploading.
+""")
+
 
 uploaded_file = st.file_uploader("📄 Upload your Excel file", type=["xlsx"])
 
