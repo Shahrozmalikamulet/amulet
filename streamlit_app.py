@@ -3,7 +3,6 @@ import pandas as pd
 import openai
 import io
 
-
 # Load API key from Streamlit secrets
 client = openai.OpenAI(api_key=st.secrets["openai"]["api_key"])
 
@@ -22,31 +21,26 @@ def process_with_openai(prompt_question, detail_text):
 # Streamlit UI
 st.title("🧠 Intelligence Report Summarizer")
 
-uploaded_file = st.file_uploader("📄 Upload your 'Intelligence report' Excel file", type=["xlsx"])
+uploaded_file = st.file_uploader("📄 Upload your Excel file", type=["xlsx"])
 
 if uploaded_file:
-    if "Intelligence report" in uploaded_file.name:
-        try:
-            df = pd.read_excel(uploaded_file, engine="openpyxl")
-            columns_to_keep = [
-                "Event ID",
-                "Reporting Timestamp",
-                "Location Name",
-                "Site Name",
-                "Location intel linked to",
-                "Details of intelligence (Detailed)"
-            ]
-            df = df[columns_to_keep]
+    try:
+        df = pd.read_excel(uploaded_file, engine="openpyxl")
+        required_columns = ["Details", "Reporting Timestamp", "Location"]
+
+        if all(column in df.columns for column in required_columns):
+            df = df[required_columns]
 
             st.info("⏳ Processing with OpenAI...")
             prompt_question = "Summarize the following intelligence report in one sentence:"
-            df["OpenAI Response"] = df["Details of intelligence (Detailed)"].apply(
+            df["OpenAI Response"] = df["Details"].apply(
                 lambda detail: process_with_openai(prompt_question, detail)
             )
 
-            # Save to in-memory buffer
+            # Prepare output
+            output_df = df[["Reporting Timestamp", "Location", "OpenAI Response"]]
             output = io.BytesIO()
-            df.to_excel(output, index=False)
+            output_df.to_excel(output, index=False)
             output.seek(0)
 
             st.success("✅ Processing complete! Download your summarized report below.")
@@ -56,7 +50,7 @@ if uploaded_file:
                 file_name="Processed_Intelligence_Report.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
-        except Exception as e:
-            st.error(f"❌ Error: {str(e)}")
-    else:
-        st.error("❌ Please upload a file named 'Intelligence report'.")
+        else:
+            st.error("❌ The uploaded file must contain the columns: 'Details', 'Reporting Timestamp', and 'Location'.")
+    except Exception as e:
+        st.error(f"❌ Error: {str(e)}")
