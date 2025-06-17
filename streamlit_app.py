@@ -44,7 +44,7 @@ uploaded_file = st.file_uploader("📄 Upload your Excel file", type=["xlsx"])
 #             df = df[required_columns]
 
 #             st.info("⏳ Processing with OpenAI...")
-#             prompt_question = "Summarize the following report in one sentence without mentioning any officers names"
+#             prompt_question = "Summarize the following report in one sentence without mentioning any names, age or date and time"
 #             df["OpenAI Response"] = df["Details"].apply(
 #                 lambda detail: process_with_openai(prompt_question, detail)
 #             )
