@@ -70,7 +70,7 @@ if uploaded_file:
 st.markdown("""
 <hr style="margin-top: 50px;">
 <div style='text-align: center; font-size: 0.9em; color: gray;'>
-    Report Summarizer | Built by Shahroz | Amulet ❤️
+    Built by Shahroz  |   Amulet   ❤️
 </div>
 """, unsafe_allow_html=True)
 
