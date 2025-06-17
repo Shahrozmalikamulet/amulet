@@ -59,7 +59,7 @@ if uploaded_file:
             st.download_button(
                 label="📥 Download Processed Report",
                 data=output,
-                file_name="Processed_Intelligence_Report.xlsx",
+                file_name="Processed_Report.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
         else:
