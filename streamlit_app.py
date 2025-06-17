@@ -66,3 +66,11 @@ if uploaded_file:
             st.error("❌ The uploaded file must contain the columns: 'Details', 'Reporting Timestamp', and 'Location'.")
     except Exception as e:
         st.error(f"❌ Error: {str(e)}")
+
+st.markdown("""
+<hr style="margin-top: 50px;">
+<div style='text-align: center; font-size: 0.9em; color: gray;'>
+    Report Summarizer | Built by Shahroz | Amulet ❤️
+</div>
+""", unsafe_allow_html=True)
+
