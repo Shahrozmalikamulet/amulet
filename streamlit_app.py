@@ -19,8 +19,8 @@ def process_with_openai(prompt_question, detail_text):
     return response.choices[0].message.content.strip()
 
 # Streamlit UI
-# st.title("🧠 Intelligence/Incident Report Summarizer")
-st.header("🧠 Intelligence/Incident Report Summarizer")  # Slightly smaller
+st.title("🧠 Report Summarizer")
+# st.header("🧠 Intelligence/Incident Report Summarizer")  # Slightly smaller
 
 st.markdown("""
 ### 📌 Instructions:
