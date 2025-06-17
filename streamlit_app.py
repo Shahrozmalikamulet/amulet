@@ -9,7 +9,7 @@ client = openai.OpenAI(api_key=st.secrets["openai"]["api_key"])
 # Function to process each row using OpenAI API
 def process_with_openai(prompt_question, detail_text):
     response = client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": prompt_question},
             {"role": "user", "content": detail_text}
