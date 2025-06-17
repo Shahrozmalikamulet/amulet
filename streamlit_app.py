@@ -19,7 +19,9 @@ def process_with_openai(prompt_question, detail_text):
     return response.choices[0].message.content.strip()
 
 # Streamlit UI
-st.title("🧠 Intelligence/Incident Report Summarizer")
+# st.title("🧠 Intelligence/Incident Report Summarizer")
+st.header("🧠 Intelligence/Incident Report Summarizer")  # Slightly smaller
+
 st.markdown("""
 ### 📌 Instructions:
 Please make sure your Excel file includes the following columns **with these exact names**:
@@ -42,7 +44,7 @@ if uploaded_file:
             df = df[required_columns]
 
             st.info("⏳ Processing with OpenAI...")
-            prompt_question = "Summarize the following intelligence report in one sentence:"
+            prompt_question = "Summarize the following report in one sentence without mentioning any officers names"
             df["OpenAI Response"] = df["Details"].apply(
                 lambda detail: process_with_openai(prompt_question, detail)
             )
